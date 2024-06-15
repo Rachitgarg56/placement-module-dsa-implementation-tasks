@@ -1,0 +1,54 @@
+<!-- Q10. -->
+<!-- <Take an input field and the button user can enter numbers in between 1 to 100. Based on the user value it will display a timer -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div style="display: flex;">
+        <div style="flex: 1;">
+            <label for=""><b>Enter between 1 to 100</b></label>
+            <input min="1" max="100" type="number" placeholder="Enter seconds..." name="" id="inputNum">
+            <button id="btn">CLICK</button>
+        </div>
+        <div style="flex: 1;">
+            <div id="timer" style="width: 100px; height: 100px; border: 1px solid black; border-radius: 100%; display: flex; justify-content: center; align-items: center;">
+                <p id="timer-value">Timer</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        const input = document.querySelector('#inputNum');
+        const btn = document.querySelector('#btn');
+        const timerValue = document.querySelector('#timer-value');
+
+        const startTimer = (seconds) => {
+            const timerId = setInterval(() => {
+                if (seconds === 0) clearInterval(timerId);
+                timerValue.innerText = seconds;
+                seconds--;
+            },1000);
+        }
+
+        btn.addEventListener('click', () => {
+            const seconds = parseInt(input.value);
+            if (seconds < 0 || seconds > 100) {
+                alert('Out of range');
+                input.value = '';
+                return;
+            }
+            input.value = '';
+            startTimer(seconds);
+        })
+
+    </script>
+
+</body>
+</html>
